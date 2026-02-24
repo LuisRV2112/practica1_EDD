@@ -1,8 +1,3 @@
-/**
- * @file ConfigPartida.cpp
- * @brief Imprime en consola el estado actual de cada flag de regla.
- * Practica1EDD - Laboratorio EDD USAC CUNOC 2026
- */
 #include "../../Modelo/ConfigPartida.h"
 #include "../../Modelo/Paleta.h"
 #include <iostream>

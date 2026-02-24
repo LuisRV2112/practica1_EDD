@@ -1,8 +1,3 @@
-/**
- * @file FichaPoderosa.cpp
- * @brief Fichas de accion: aplica robo, bloqueo o inversion segun su efecto.
- * Practica1EDD - Laboratorio EDD USAC CUNOC 2026
- */
 #include "../../Modelo/FichaPoderosa.h"
 #include "../../Modelo/Pantalla.h"
 #include "../../Modelo/ContextoPartida.h"
@@ -14,7 +9,6 @@ FichaPoderosa::FichaPoderosa(TonoCarta tono, EfectoCarta efecto, CaraBaraja cara
 
 void FichaPoderosa::renderizar() const { Pantalla::dibujarFicha(this); }
 
-// Valida si coincide tono, efecto o si la carta en mesa es libre
 bool FichaPoderosa::esValida(const Ficha* enMesa) const {
     if (!enMesa) return true;
     return (enMesa->getTono()      == tono_)   ||

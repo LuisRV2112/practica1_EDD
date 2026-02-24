@@ -1,9 +1,4 @@
 #pragma once
-/**
- * @file Contendiente.h
- * @brief Jugador con mano, flag UNO, escudo y estado de eliminacion.
- * Practica1EDD - Laboratorio EDD USAC CUNOC 2026
- */
 #include "ManoJugador.h"
 #include <string>
 

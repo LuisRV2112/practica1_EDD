@@ -1,8 +1,4 @@
-/**
- * @file Baraja.cpp
- * @brief Construye y mezcla la baraja (Pila<Ficha*>) con Fisher-Yates.
- * Practica1EDD - Laboratorio EDD USAC CUNOC 2026
- */
+
 #include "../../Modelo/Baraja.h"
 #include "../../Modelo/FichaNumeral.h"
 #include "../../Modelo/FichaPoderosa.h"
@@ -23,7 +19,6 @@ Baraja::~Baraja() {
     }
 }
 
-// Arma las 108 fichas estandar del lado luminoso + 2 personalizadas por color
 void Baraja::armarCaraLuminosa() {
     TonoCarta tonos[] = {
         TonoCarta::CARMESI, TonoCarta::ESMERALDA,
@@ -42,7 +37,7 @@ void Baraja::armarCaraLuminosa() {
         }
         pilaReserva_.apilar(new FichaDevuraTono(t,    CaraBaraja::LUMINOSA));
         pilaReserva_.apilar(new FichaBarreraActiva(t, CaraBaraja::LUMINOSA));
-        // Cartas personalizadas: 1 SPY + 1 SWP por color
+        // Cartas personalizadas
         pilaReserva_.apilar(new FichaMostrarMano(t,       CaraBaraja::LUMINOSA));
         pilaReserva_.apilar(new FichaIntercambiarCarta(t, CaraBaraja::LUMINOSA));
     }
@@ -52,7 +47,7 @@ void Baraja::armarCaraLuminosa() {
     }
 }
 
-// Arma las fichas del lado sombrio (UNO Flip) + 2 personalizadas por color
+// Junta las fichas del lado sombrio (UNO Flip) + 2 personalizadas por color
 void Baraja::armarCaraSombria() {
     TonoCarta sombrioS[] = {
         TonoCarta::FUCSIA, TonoCarta::AGUAMARINA,
@@ -82,7 +77,6 @@ void Baraja::armarCaraSombria() {
     }
 }
 
-// Escala los mazos segun jugadores y activa cara sombria si cfg.modoFlip
 void Baraja::preparar(int nContendientes, const ConfigPartida& cfg) {
     int nMazos = (nContendientes - 1) / 6 + 1;
     for (int m = 0; m < nMazos; ++m) {
@@ -92,7 +86,7 @@ void Baraja::preparar(int nContendientes, const ConfigPartida& cfg) {
     mezclar();
 }
 
-// Mezcla Fisher-Yates: vuelca la pila, baraja el arreglo y recarga
+
 void Baraja::mezclar() {
     int n = pilaReserva_.totalElementos();
     if (n <= 1) return;
@@ -125,7 +119,6 @@ Ficha* Baraja::fichaEnMesa() const {
     return pilaUsadas_.estaVacia() ? nullptr : pilaUsadas_.verTope();
 }
 
-// Recicla el descarte en la reserva conservando la ficha del tope en mesa
 void Baraja::reciclarUsadas() {
     if (pilaUsadas_.estaVacia()) return;
     Ficha* cima = pilaUsadas_.verTope();

@@ -1,8 +1,3 @@
-/**
- * @file Pantalla.cpp
- * @brief Renderizado completo: arena, fichas ASCII, menus y alertas.
- * Practica1EDD - Laboratorio EDD USAC CUNOC 2026
- */
 #include "../../Modelo/Pantalla.h"
 #include "../../Modelo/Paleta.h"
 #include "../../Modelo/FichaNumeral.h"
@@ -17,7 +12,6 @@
 #include <thread>
 #include <chrono>
 
-// Mapea un tono al codigo ANSI de fondo correspondiente
 const char* Pantalla::fondoTono(TonoCarta t) {
     switch (t) {
         case TonoCarta::CARMESI:    return Paleta::FND_ROJO;
@@ -33,7 +27,6 @@ const char* Pantalla::fondoTono(TonoCarta t) {
     }
 }
 
-// Devuelve negro o blanco para contraste sobre el fondo del tono
 const char* Pantalla::textoTono(TonoCarta t) {
     switch (t) {
         case TonoCarta::ZAFIRO:
@@ -44,7 +37,6 @@ const char* Pantalla::textoTono(TonoCarta t) {
     }
 }
 
-// Centra s dentro de un campo de ancho caracteres
 std::string Pantalla::centrarTexto(const std::string& s, int ancho) {
     int pad = (ancho - static_cast<int>(s.size())) / 2;
     std::string r(pad, ' ');
@@ -53,7 +45,6 @@ std::string Pantalla::centrarTexto(const std::string& s, int ancho) {
     return r;
 }
 
-// ── Utilidades ────────────────────────────────────────────────────────────────
 
 void Pantalla::limpiar() { std::cout << "\033[2J\033[H"; }
 
@@ -81,28 +72,26 @@ void Pantalla::encabezado(const std::string& texto) {
     std::cout << "\n";
 }
 
-// ── Portada ───────────────────────────────────────────────────────────────────
 
 void Pantalla::mostrarPortada() {
     limpiar();
     std::cout << "\n\n";
     std::cout << Paleta::ROJO  << Paleta::NEGRITA;
-    std::cout << "   /\\ /\\ |\\ |  /\\  \n";
-    std::cout << "  /  V  \\ | \\| /--\\ \n";
+    std::cout << "   BIENVENIDO A UNO \n";
     std::cout << Paleta::RESET;
     std::cout << Paleta::VERDE << Paleta::NEGRITA;
     std::cout << "  ~~~~~~~~~~~~~~~~~~~~\n";
     std::cout << Paleta::RESET;
     std::cout << Paleta::AMARILLO << Paleta::NEGRITA;
-    std::cout << "      A  R  E  N  A\n";
+    std::cout << "      CLASICO Y FLIP\n";
     std::cout << Paleta::RESET;
     std::cout << Paleta::AZUL;
-    std::cout << "  Laboratorio EDD - USAC CUNOC 2026\n\n";
+    std::cout << "  PRACTICA 1\n\n";
     std::cout << Paleta::RESET;
     separador('~', 40);
 }
 
-// ── Menu Principal ─────────────────────────────────────────────────────────────
+
 
 void Pantalla::mostrarMenuPrincipal() {
     mostrarPortada();
@@ -112,13 +101,13 @@ void Pantalla::mostrarMenuPrincipal() {
     std::cout << "   ( 1 )  Iniciar Partida\n";
     std::cout << "   ( 2 )  Ajustar Configuracion\n";
     std::cout << "   ( 3 )  Ver Demo de Fichas\n";
-    std::cout << "   ( 4 )  Cargar Config desde Archivo\n";
-    std::cout << "   ( 0 )  Salir del Arena\n\n";
+    std::cout << "   ( 4 )  Cargar Configuracion desde Archivo\n";
+    std::cout << "   ( 0 )  Salir del juiego\n\n";
     separador('-', 40);
-    std::cout << "  Opcion >> ";
+    std::cout << "  Elige >> ";
 }
 
-// ── Menu Configuracion ─────────────────────────────────────────────────────────
+// Menu Configuracion
 
 void Pantalla::mostrarMenuConfig(const ConfigPartida& cfg) {
     limpiar();
@@ -128,7 +117,7 @@ void Pantalla::mostrarMenuConfig(const ConfigPartida& cfg) {
     std::cout << "   ( 1 ) Alternar: Apilar robos\n";
     std::cout << "   ( 2 ) Alternar: Reto ficha libre\n";
     std::cout << "   ( 3 ) Alternar: Robo ilimitado\n";
-    std::cout << "   ( 4 ) Alternar: Grito UNO obligatorio\n";
+    std::cout << "   ( 4 ) Alternar: Grito UNO (no desactivar)\n";
     std::cout << "   ( 5 ) Alternar: Ganar con Obsidiana\n";
     std::cout << "   ( 6 ) Alternar: Modo Flip\n";
     std::cout << "   ( 7 ) Guardar configuracion\n";
@@ -136,7 +125,7 @@ void Pantalla::mostrarMenuConfig(const ConfigPartida& cfg) {
     std::cout << "  Opcion >> ";
 }
 
-// ── Menu Accion durante turno ─────────────────────────────────────────────────
+// Menu Accion durante turno
 
 void Pantalla::mostrarMenuAccion(const Contendiente* c, int turno) {
     std::cout << "\n";
@@ -161,23 +150,23 @@ void Pantalla::mostrarMenuAccion(const Contendiente* c, int turno) {
     std::cout << "  Accion >> ";
 }
 
-// ── Dibujo de una ficha individual ────────────────────────────────────────────
+//Dibujo de una ficha individual
 /*
   +=========+
   | X     X |   <- inicial del tono
-  |  [SIM]  |   <- simbolo centrado
+  |  [  |   <- simbolo centrado
   |         |
-  |  [SIM]  |
+  |  []  |
   | X     X |
   +=========+
 */
 void Pantalla::dibujarFicha(const Ficha* f) {
     if (!f) {
-        // Cara oculta de la reserva
+
         std::cout << Paleta::FND_AZUL << Paleta::BLANCO << Paleta::NEGRITA;
         std::cout << "+=========+\n";
         std::cout << "|  # # #  |\n";
-        std::cout << "|  ARENA  |\n";
+        std::cout << "|  UNO    |\n";
         std::cout << "|  # # #  |\n";
         std::cout << "|  # # #  |\n";
         std::cout << "|  # # #  |\n";
@@ -201,7 +190,7 @@ void Pantalla::dibujarFicha(const Ficha* f) {
     std::cout << "+=========+" << Paleta::RESET << "\n";
 }
 
-// ── Grupo de fichas en horizontal ────────────────────────────────────────────
+
 
 void Pantalla::dibujarFichasDesdeMano(const ManoJugador* mano,
                                        int desde, int hasta) {
@@ -245,7 +234,6 @@ void Pantalla::dibujarFichasDesdeMano(const ManoJugador* mano,
     delete[] buf;
 }
 
-// Muestra toda la mano de un jugador paginada en grupos de 6
 void Pantalla::mostrarManoCompleta(const ManoJugador* mano,
                                     const std::string& alias) {
     if (!mano) return;
@@ -268,7 +256,6 @@ void Pantalla::mostrarManoCompleta(const ManoJugador* mano,
     }
 }
 
-// ── FichaMostrarMano: revela la mano por N segundos y limpia ─────────────────
 
 void Pantalla::mostrarManoTemporal(const ManoJugador* mano,
                                     const std::string& alias,
@@ -291,15 +278,12 @@ void Pantalla::mostrarManoTemporal(const ManoJugador* mano,
     limpiar();
 }
 
-// ── Seleccion de rival ────────────────────────────────────────────────────────
-
-// Muestra la lista de contendientes (excluyendo al activo) y devuelve el indice
-// de la ranura elegida por el jugador activo.
+// Seleccion de rival
+// Muestra la lista de contendientes (excluyendo al activo) y devuelve el indice de la ranura elegida por el jugador activo.
 int Pantalla::elegirRival(const Contendiente* lista[], int total, int idxActivo) {
     std::cout << "\n" << Paleta::CIAN << Paleta::NEGRITA
               << "  Elige al rival objetivo:\n" << Paleta::RESET;
 
-    // Construir lista de indices validos
     int validos[20];
     int nValidos = 0;
     for (int i = 0; i < total; ++i) {
@@ -310,7 +294,7 @@ int Pantalla::elegirRival(const Contendiente* lista[], int total, int idxActivo)
         validos[nValidos++] = i;
     }
 
-    if (nValidos == 0) return -1; // sin rivales disponibles
+    if (nValidos == 0) return -1; // detecta que no hay rivales disponibles
 
     int eleccion = -1;
     while (true) {
@@ -322,7 +306,6 @@ int Pantalla::elegirRival(const Contendiente* lista[], int total, int idxActivo)
             continue;
         }
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-        // Buscar v-1 dentro de los indices validos
         for (int k = 0; k < nValidos; ++k) {
             if (validos[k] + 1 == v) { eleccion = validos[k]; break; }
         }
@@ -332,7 +315,6 @@ int Pantalla::elegirRival(const Contendiente* lista[], int total, int idxActivo)
     return eleccion;
 }
 
-// ── Arena de juego ────────────────────────────────────────────────────────────
 
 void Pantalla::mostrarArena(const ContextoPartida& ctx,
                               const Contendiente*    lista[],
@@ -344,7 +326,7 @@ void Pantalla::mostrarArena(const ContextoPartida& ctx,
 
     std::cout << Paleta::NEGRITA << Paleta::CIAN;
     separador('=', 64);
-    std::cout << "  UNO ARENA  |  Turno #" << ctx.numeroTurno
+    std::cout << "  UNO  |  Turno #" << ctx.numeroTurno
               << "  |  Cara: "
               << (ctx.caraActiva == CaraBaraja::LUMINOSA ? "LUMINOSA" : "SOMBRIA")
               << "  |  Sentido: "
@@ -361,7 +343,7 @@ void Pantalla::mostrarArena(const ContextoPartida& ctx,
         switch (fi) {
             case 0: return B + "+=========+" + R;
             case 1: return B + "|  # # #  |" + R;
-            case 2: return B + "|  ARENA  |" + R;
+            case 2: return B + "|  UNO    |" + R;
             case 3: return B + "|  # # #  |" + R;
             case 4: return B + "|  # # #  |" + R;
             case 5: return B + "|  # # #  |" + R;
@@ -393,7 +375,7 @@ void Pantalla::mostrarArena(const ContextoPartida& ctx,
         }
     };
 
-    std::cout << "  RESERVA               EN MESA\n";
+    std::cout << " PILA CARTAS                EN LA MESA\n";
     for (int fi = 0; fi <= 7; ++fi)
         std::cout << "  " << linReserva(fi) << "    " << linMesa(fi) << "\n";
 
@@ -409,7 +391,7 @@ void Pantalla::mostrarArena(const ContextoPartida& ctx,
     std::cout << "\n\n";
 
     separador('-', 64);
-    std::cout << Paleta::NEGRITA << "  CONTENDIENTES:\n" << Paleta::RESET;
+    std::cout << Paleta::NEGRITA << "  CONTENDIENTES Y/O JUGADORES:\n" << Paleta::RESET;
     for (int i = 0; i < total; ++i) {
         if (!lista[i] || lista[i]->eliminado()) continue;
         bool activo = (i == idxActivo);
@@ -425,7 +407,6 @@ void Pantalla::mostrarArena(const ContextoPartida& ctx,
     separador('-', 64);
 }
 
-// ── Alertas ───────────────────────────────────────────────────────────────────
 
 void Pantalla::alertaUNO(const std::string& alias) {
     std::cout << "\n" << Paleta::AMARILLO << Paleta::NEGRITA
@@ -482,7 +463,7 @@ void Pantalla::mostrarTurno(const std::string& alias, int turno) {
               << Paleta::RESET;
 }
 
-// ── Demo visual ───────────────────────────────────────────────────────────────
+// Demo visual
 
 void Pantalla::demoFichas() {
     limpiar();

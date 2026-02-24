@@ -26,7 +26,7 @@ static int pedirEntero(int minVal, int maxVal) {
     return v;
 }
 
-// Lee una linea no vacia
+
 static std::string pedirTexto(const std::string& aviso) {
     std::string s;
     std::cout << aviso;
@@ -34,7 +34,7 @@ static std::string pedirTexto(const std::string& aviso) {
     return s;
 }
 
-// Muestra opciones de tono segun la cara activa y devuelve el elegido
+
 static TonoCarta elegirTono(CaraBaraja cara) {
     std::cout << "\n  Selecciona el tono:\n";
     if (cara == CaraBaraja::LUMINOSA) {
@@ -60,7 +60,7 @@ static TonoCarta elegirTono(CaraBaraja cara) {
     }
 }
 
-// Retorna el indice de la primera ficha jugable; -1 si no hay ninguna
+
 static int primerFichaValida(const Contendiente* c,
                               const Ficha* enMesa,
                               const ContextoPartida& ctx) {
@@ -78,13 +78,11 @@ static int primerFichaValida(const Contendiente* c,
     return -1;
 }
 
-// Devuelve el alias del unico jugador que queda en la rueda
 static std::string jugadorRestante(RuedaTurnos* rueda) {
     Contendiente* c = rueda->getActual();
     return c ? c->getAlias() : "Desconocido";
 }
 
-// Construye el arreglo de contendientes visibles para mostrarArena()
 static int construirLista(RuedaTurnos* rueda, const Contendiente* lista[],
                            int maxC, const Contendiente* actual, int& idxActivo) {
     int total = 0;
@@ -100,7 +98,7 @@ static int construirLista(RuedaTurnos* rueda, const Contendiente* lista[],
     return total;
 }
 
-// ── Efecto SPY: muestra la mano del rival por 3 segundos ─────────────────────
+// Efecto SPY: muestra la mano del rival por 3 segundos
 static void resolverMostrarMano(ContextoPartida& ctx,
                                  const Contendiente* lista[], int total,
                                  int idxActivo) {
@@ -124,7 +122,7 @@ static void resolverMostrarMano(ContextoPartida& ctx,
     Pantalla::mostrarManoTemporal(rival->getMano(), rival->getAlias(), 3);
 }
 
-// ── Efecto SWP: roba una carta (aleatoria o elegida) de un rival ─────────────
+// Efecto SWP: roba una carta (aleatoria o elegida) de un rival
 static void resolverIntercambio(ContextoPartida& ctx,
                                  const Contendiente* lista[], int total,
                                  int idxActivo) {
@@ -159,7 +157,6 @@ static void resolverIntercambio(ContextoPartida& ctx,
 
     int idx = 0;
     if (modo == 2) {
-        // El rival muestra su mano y elige el indice
         Pantalla::mostrarManoCompleta(rival->getMano(), rival->getAlias());
         std::cout << "  " << rival->getAlias()
                   << ": indice de la ficha a ceder [0-"
@@ -181,7 +178,7 @@ static void resolverIntercambio(ContextoPartida& ctx,
     Pantalla::esperarEnter();
 }
 
-// ── Turno principal ───────────────────────────────────────────────────────────
+
 static void ejecutarTurno(ContextoPartida& ctx) {
     Contendiente* c      = ctx.rueda->getActual();
     Ficha*        enMesa = ctx.baraja->fichaEnMesa();
@@ -194,7 +191,7 @@ static void ejecutarTurno(ContextoPartida& ctx) {
     Pantalla::mostrarArena(ctx, lista, total, idxActivo,
                             ctx.baraja->fichasDisponibles(), enMesa);
 
-    // Si habia una barrera activa, anula el robo acumulado
+
     if (c->tieneBarrera() && ctx.acumRobo > 0) {
         std::cout << Paleta::VERDE << Paleta::NEGRITA
                   << "  [BARRERA] " << c->getAlias()
@@ -205,7 +202,7 @@ static void ejecutarTurno(ContextoPartida& ctx) {
         return;
     }
 
-    // Si hay robo acumulado y el jugador no puede apilar, roba y pasa
+
     if (ctx.acumRobo > 0 && ctx.config.apilar) {
         if (primerFichaValida(c, enMesa, ctx) < 0) {
             std::cout << Paleta::ROJO
@@ -224,7 +221,7 @@ static void ejecutarTurno(ContextoPartida& ctx) {
     std::string entrada;
     std::getline(std::cin, entrada);
 
-    // ── Q: Dejar el juego ────────────────────────────────────────────────────
+
     if (entrada == "Q" || entrada == "q") {
         std::string aliasAbandona = c->getAlias();
         c->retirar();
@@ -240,7 +237,7 @@ static void ejecutarTurno(ContextoPartida& ctx) {
         return;
     }
 
-    // ── T: Tomar ficha ───────────────────────────────────────────────────────
+
     if (entrada == "T" || entrada == "t") {
         if (!ctx.config.roboIlimitado) {
             Ficha* f = ctx.baraja->tomarFicha();
@@ -265,21 +262,18 @@ static void ejecutarTurno(ContextoPartida& ctx) {
         return;
     }
 
-    // ── U: Gritar UNO ────────────────────────────────────────────────────────
     if (entrada == "U" || entrada == "u") {
         c->marcarUNO(true);
         Pantalla::alertaUNO(c->getAlias());
         return;
     }
 
-    // ── V: Ver fichas ────────────────────────────────────────────────────────
     if (entrada == "V" || entrada == "v") {
         Pantalla::mostrarManoCompleta(c->getMano(), c->getAlias());
         Pantalla::esperarEnter();
         return;
     }
 
-    // ── Numero: Lanzar ficha por indice ──────────────────────────────────────
     try {
         int idx = std::stoi(entrada);
         if (idx < 0 || idx >= c->fichasEnMano()) {
@@ -289,7 +283,6 @@ static void ejecutarTurno(ContextoPartida& ctx) {
         Ficha* f = c->verFicha(idx);
         if (!f) { Pantalla::alertaError("Ficha no encontrada."); return; }
 
-        // Verificar si la ficha es valida en el contexto actual
         bool valida = true;
         if (ctx.acumRobo > 0 && ctx.config.apilar) {
             valida = (f->getEfecto() == enMesa->getEfecto() ||
@@ -302,7 +295,6 @@ static void ejecutarTurno(ContextoPartida& ctx) {
             return;
         }
 
-        // Regla: no ganar con Obsidiana si la opcion esta desactivada
         if (c->fichasEnMano() == 1 &&
             f->getTono() == TonoCarta::OBSIDIANA &&
             !ctx.config.permitirObs) {
@@ -315,7 +307,6 @@ static void ejecutarTurno(ContextoPartida& ctx) {
 
         Ficha* lanzada = c->lanzarFicha(idx);
 
-        // Si es comodin, el jugador elige el tono
         if (lanzada->getCategoria() == CategoriaCarta::LIBRE) {
             TonoCarta elegido = elegirTono(ctx.caraActiva);
             lanzada->asignarTono(elegido);
@@ -327,9 +318,8 @@ static void ejecutarTurno(ContextoPartida& ctx) {
         ctx.baraja->descartarFicha(lanzada);
         lanzada->ejecutarEfecto(ctx);
 
-        // Resolver efectos interactivos pendientes (SPY y SWP)
+
         if (ctx.pendienteMostrarMano) {
-            // Reconstruir lista actualizada antes de resolver
             total = construirLista(ctx.rueda, lista, MAX_C, c, idxActivo);
             resolverMostrarMano(ctx, lista, total, idxActivo);
         }
@@ -355,17 +345,17 @@ static void ejecutarTurno(ContextoPartida& ctx) {
     }
 }
 
-// ── Iniciar partida ───────────────────────────────────────────────────────────
+// Iniciar partida
 static void iniciarPartida(ConfigPartida& cfg) {
     Pantalla::limpiar();
-    Pantalla::encabezado("NUEVA PARTIDA - UNO ARENA");
+    Pantalla::encabezado("NUEVA PARTIDA");
 
-    std::cout << "  Numero de contendientes (min 2): ";
+    std::cout << "  Numero de contendientes y/o jugadores (min 2): ";
     int n = pedirEntero(2, 20);
 
     Contendiente** jugadores = new Contendiente*[n];
     for (int i = 0; i < n; ++i) {
-        std::string alias = pedirTexto("  Alias del contendiente "
+        std::string alias = pedirTexto("  Alias del contendiente y/o jugador"
                                        + std::to_string(i + 1) + ": ");
         jugadores[i] = new Contendiente(alias);
     }
@@ -376,12 +366,10 @@ static void iniciarPartida(ConfigPartida& cfg) {
     RuedaTurnos* rueda = new RuedaTurnos();
     for (int i = 0; i < n; ++i) rueda->inscribir(jugadores[i]);
 
-    // Repartir 7 fichas a cada jugador
     for (int i = 0; i < n; ++i)
         for (int k = 0; k < 7; ++k)
             jugadores[i]->recibirFicha(baraja->tomarFicha());
 
-    // Primera ficha en mesa: no puede ser un comodin libre
     Ficha* primera = baraja->tomarFicha();
     while (primera && primera->getCategoria() == CategoriaCarta::LIBRE) {
         baraja->descartarFicha(primera);
@@ -415,7 +403,7 @@ static void iniciarPartida(ConfigPartida& cfg) {
     delete[] jugadores;
 }
 
-// ── Ajustar configuracion ─────────────────────────────────────────────────────
+
 static void ajustarConfig(ConfigPartida& cfg) {
     bool volver = false;
     while (!volver) {
@@ -465,6 +453,6 @@ int main() {
         }
     }
 
-    std::cout << Paleta::CIAN << "\n  Hasta la proxima en el Arena!\n\n" << Paleta::RESET;
+    std::cout << Paleta::CIAN << "\n  Hasta la proxima\n\n" << Paleta::RESET;
     return 0;
 }

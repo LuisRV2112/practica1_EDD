@@ -1,9 +1,4 @@
 #pragma once
-/**
- * @file ContextoPartida.h
- * @brief Estado mutable de la partida; se pasa por referencia a ejecutarEfecto().
- * Practica1EDD - Laboratorio EDD USAC CUNOC 2026
- */
 #include "Dominio.h"
 #include "ConfigPartida.h"
 
@@ -27,10 +22,8 @@ struct ContextoPartida {
 
     int           numeroTurno     = 0;
 
-    // Flags para cartas personalizadas — se activan en ejecutarEfecto()
-    // y se consumen en ejecutarTurno() en main.cpp
-    bool          pendienteMostrarMano    = false; // FichaMostrarMano fue jugada
-    bool          pendienteIntercambio    = false; // FichaIntercambiarCarta fue jugada
+    bool          pendienteMostrarMano    = false;
+    bool          pendienteIntercambio    = false;
 
     ConfigPartida config;
 };

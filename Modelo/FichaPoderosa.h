@@ -1,9 +1,5 @@
 #pragma once
-/**
- * @file FichaPoderosa.h
- * @brief Ficha de accion: robo, bloqueo o giro segun su EfectoCarta.
- * Practica1EDD - Laboratorio EDD USAC CUNOC 2026
- */
+
 #include "Ficha.h"
 
 class FichaPoderosa : public Ficha {

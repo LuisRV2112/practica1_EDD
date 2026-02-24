@@ -1,9 +1,5 @@
 #pragma once
-/**
- * @file FichaVolteo.h
- * @brief VLT cambia cara; DVR devora fichas del rival; BRR activa escudo.
- * Practica1EDD - Laboratorio EDD USAC CUNOC 2026
- */
+
 #include "Ficha.h"
 
 class FichaVolteo : public Ficha {

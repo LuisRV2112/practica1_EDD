@@ -1,9 +1,5 @@
 #pragma once
-/**
- * @file ManoJugador.h
- * @brief Lista enlazada simple que representa la mano de un contendiente.
- * Practica1EDD - Laboratorio EDD USAC CUNOC 2026
- */
+
 #include "Ficha.h"
 
 class ManoJugador {
@@ -23,7 +19,6 @@ public:
     ManoJugador(const ManoJugador&)            = delete;
     ManoJugador& operator=(const ManoJugador&) = delete;
 
-    // Agrega al final  O(n)
     void agregar(Ficha* f) {
         Enlace* nuevo = new Enlace(f);
         if (!inicio_) { inicio_ = nuevo; }
@@ -31,7 +26,7 @@ public:
         ++cantidad_;
     }
 
-    // Extrae en posicion idx  O(n)
+
     Ficha* extraer(int idx) {
         if (idx < 0 || idx >= cantidad_) return nullptr;
         Enlace* prev = nullptr; Enlace* curr = inicio_;
@@ -41,7 +36,6 @@ public:
         Ficha* f = curr->ficha; delete curr; --cantidad_; return f;
     }
 
-    // Consulta sin extraer  O(n)
     Ficha* consultar(int idx) const {
         if (idx < 0 || idx >= cantidad_) return nullptr;
         Enlace* it = inicio_;
@@ -52,7 +46,6 @@ public:
     int  totalFichas() const { return cantidad_; }
     bool sinFichas()   const { return cantidad_ == 0; }
 
-    // Libera nodos sin destruir las fichas
     void vaciar() {
         while (inicio_) { Enlace* tmp = inicio_; inicio_ = inicio_->proximo; delete tmp; }
         cantidad_ = 0;

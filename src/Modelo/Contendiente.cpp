@@ -1,8 +1,4 @@
-/**
- * @file Contendiente.cpp
- * @brief Gestiona la mano del jugador: recibir, lanzar y consultar fichas.
- * Practica1EDD - Laboratorio EDD USAC CUNOC 2026
- */
+
 #include "../../Modelo/Contendiente.h"
 
 Contendiente::Contendiente(const std::string& alias)
@@ -11,7 +7,6 @@ Contendiente::Contendiente(const std::string& alias)
 
 Contendiente::~Contendiente() { delete fichas_; }
 
-// Agrega la ficha a la mano y resetea el flag UNO
 void Contendiente::recibirFicha(Ficha* f) {
     if (f) fichas_->agregar(f);
     unoGritado_ = false;

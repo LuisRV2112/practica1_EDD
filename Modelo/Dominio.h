@@ -1,12 +1,7 @@
 #pragma once
-/**
- * @file Dominio.h
- * @brief Enumeraciones globales: tonos, categorias, efectos y cara del mazo.
- * Practica1EDD - Laboratorio EDD USAC CUNOC 2026
- */
 #include <string>
 
-// Tono (color) de una ficha — cara luminosa, sombria u obsidiana (wildcard)
+// Tono (color) de una carta
 enum class TonoCarta {
     CARMESI, ESMERALDA, ZAFIRO, DORADO,       // Cara luminosa
     FUCSIA, AGUAMARINA, CORAL, INDIGO,         // Cara sombria (UNO Flip)
@@ -14,7 +9,6 @@ enum class TonoCarta {
     INDEFINIDO
 };
 
-// Categoria que identifica el tipo de ficha dentro de la jerarquia
 enum class CategoriaCarta {
     NUMERAL,
     PODEROSA,
@@ -22,11 +16,10 @@ enum class CategoriaCarta {
     VOLTEO,
     DEVORA_TONO,
     BARRERA_ACTIVA,
-    MOSTRAR_MANO,       // Carta personalizada: fuerza a un rival a mostrar su mano
-    INTERCAMBIAR_CARTA  // Carta personalizada: intercambia una carta con un rival
+    MOSTRAR_MANO,
+    INTERCAMBIAR_CARTA
 };
 
-// Efecto que se aplica al contexto cuando la ficha es jugada
 enum class EfectoCarta {
     NINGUNO,
     ROBO_UNO,
@@ -46,7 +39,7 @@ enum class EfectoCarta {
     ROBAR_CARTA         // Efecto de FichaIntercambiarCarta
 };
 
-// Cara activa del mazo para el modo UNO Flip
+
 enum class CaraBaraja { LUMINOSA, SOMBRIA };
 
 // Convierte TonoCarta a su nombre legible
@@ -65,7 +58,6 @@ inline std::string nombreTono(TonoCarta t) {
     }
 }
 
-// Devuelve la inicial del tono para dibujar la ficha en consola
 inline char inicialTono(TonoCarta t) {
     switch (t) {
         case TonoCarta::CARMESI:    return 'C';

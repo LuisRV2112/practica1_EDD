@@ -1,9 +1,4 @@
 #pragma once
-/**
- * @file Ficha.h
- * @brief Clase abstracta base; toda ficha tiene tono, categoria, efecto y cara.
- * Practica1EDD - Laboratorio EDD USAC CUNOC 2026
- */
 #include "Dominio.h"
 
 struct ContextoPartida;

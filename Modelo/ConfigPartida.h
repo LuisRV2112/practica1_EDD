@@ -1,20 +1,15 @@
 #pragma once
-/**
- * @file ConfigPartida.h
- * @brief Flags que controlan las reglas opcionales; serializable a .txt.
- * Practica1EDD - Laboratorio EDD USAC CUNOC 2026
- */
 #include <string>
 #include <fstream>
 #include <iostream>
 
 struct ConfigPartida {
-    bool apilar         = false; // acumulacion de +2/+4
-    bool retarLibre     = false; // reto al +4
-    bool roboIlimitado  = false; // robar hasta poder jugar
-    bool obligarUNO     = true;  // gritar UNO al quedar con 1
-    bool permitirObs    = false; // ganar con Obsidiana
-    bool modoFlip       = false; // activar cara sombria
+    bool apilar         = false;
+    bool retarLibre     = false;
+    bool roboIlimitado  = false;
+    bool obligarUNO     = true;
+    bool permitirObs    = false;
+    bool modoFlip       = false;
 
     void mostrar() const;
 

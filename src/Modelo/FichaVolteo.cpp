@@ -1,15 +1,9 @@
-/**
- * @file FichaVolteo.cpp
- * @brief VLT: cambia cara; DVR: devora fichas del tono activo; BRR: activa escudo.
- * Practica1EDD - Laboratorio EDD USAC CUNOC 2026
- */
 #include "../../Modelo/FichaVolteo.h"
 #include "../../Modelo/Pantalla.h"
 #include "../../Modelo/ContextoPartida.h"
 #include "../../Modelo/RuedaTurnos.h"
 #include "../../Modelo/Baraja.h"
 
-// ── FichaVolteo ───────────────────────────────────────────────────────────────
 FichaVolteo::FichaVolteo(TonoCarta tono, CaraBaraja cara)
     : Ficha(tono, CategoriaCarta::VOLTEO, EfectoCarta::LANZAR_VOLTEO, cara) {}
 
@@ -22,7 +16,7 @@ bool FichaVolteo::esValida(const Ficha* enMesa) const {
            (enMesa->getCategoria() == CategoriaCarta::LIBRE);
 }
 
-// Invierte la cara activa del mazo
+// Invierte la cara activa de lsa cartas
 void FichaVolteo::ejecutarEfecto(ContextoPartida& ctx) const {
     ctx.caraActiva = (ctx.caraActiva == CaraBaraja::LUMINOSA)
                      ? CaraBaraja::SOMBRIA : CaraBaraja::LUMINOSA;
@@ -31,7 +25,6 @@ void FichaVolteo::ejecutarEfecto(ContextoPartida& ctx) const {
 
 std::string FichaVolteo::obtenerSimbolo() const { return "VLT"; }
 
-// ── FichaDevuraTono ──────────────────────────────────────────────────────────
 FichaDevuraTono::FichaDevuraTono(TonoCarta tono, CaraBaraja cara)
     : Ficha(tono, CategoriaCarta::DEVORA_TONO, EfectoCarta::DEVORA_COLOR, cara) {}
 
@@ -43,7 +36,6 @@ bool FichaDevuraTono::esValida(const Ficha* enMesa) const {
            (enMesa->getEfecto() == EfectoCarta::DEVORA_COLOR);
 }
 
-// Retira del rival todas las fichas que coincidan con el tono activo en mesa
 void FichaDevuraTono::ejecutarEfecto(ContextoPartida& ctx) const {
     Contendiente* sig  = ctx.rueda->getSiguiente();
     ManoJugador*  mano = sig->getMano();
@@ -58,7 +50,6 @@ void FichaDevuraTono::ejecutarEfecto(ContextoPartida& ctx) const {
 
 std::string FichaDevuraTono::obtenerSimbolo() const { return "DVR"; }
 
-// ── FichaBarreraActiva ───────────────────────────────────────────────────────
 FichaBarreraActiva::FichaBarreraActiva(TonoCarta tono, CaraBaraja cara)
     : Ficha(tono, CategoriaCarta::BARRERA_ACTIVA, EfectoCarta::ESCUDO_ACTIVO, cara) {}
 
@@ -70,10 +61,9 @@ bool FichaBarreraActiva::esValida(const Ficha* enMesa) const {
            (enMesa->getEfecto() == EfectoCarta::ESCUDO_ACTIVO);
 }
 
-// Activa el escudo del jugador activo para anular el proximo robo acumulado
 void FichaBarreraActiva::ejecutarEfecto(ContextoPartida& ctx) const {
     Contendiente* actual = ctx.rueda->getActual();
     if (actual) actual->activarBarrera(true);
 }
 
-std::string FichaBarreraActiva::obtenerSimbolo() const { return "BRR"; }
+std::string FichaBarreraActiva::obtenerSimbolo() const { return "cd"; }

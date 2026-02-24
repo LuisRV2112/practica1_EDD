@@ -1,9 +1,4 @@
 #pragma once
-/**
- * @file Baraja.h
- * @brief Mazo implementado como Pila<Ficha*>; mezcla con Fisher-Yates.
- * Practica1EDD - Laboratorio EDD USAC CUNOC 2026
- */
 #include "../include/TADs/Pila.h"
 #include "Ficha.h"
 #include "ConfigPartida.h"

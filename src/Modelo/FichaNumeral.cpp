@@ -1,8 +1,3 @@
-/**
- * @file FichaNumeral.cpp
- * @brief Ficha numerica (0-9): valida si coincide tono o digito con la carta en mesa.
- * Practica1EDD - Laboratorio EDD USAC CUNOC 2026
- */
 #include "../../Modelo/FichaNumeral.h"
 #include "../../Modelo/Pantalla.h"
 #include "../../Modelo/ContextoPartida.h"

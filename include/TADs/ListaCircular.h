@@ -1,9 +1,4 @@
 #pragma once
-/**
- * @file ListaCircular.h
- * @brief Lista doblemente enlazada circular generica
- * Practica1EDD - Laboratorio EDD USAC CUNOC 2026
- */
 #include "Nodo.h"
 
 template <typename T>
@@ -16,7 +11,6 @@ private:
 public:
     ListaCircular() : actual(nullptr), tamano(0), sentidoHorario(true) {}
 
-    /** Inserta al final de la lista circular */
     void insertar(T dato) {
         Nodo<T>* nuevo = new Nodo<T>(dato);
         if (actual == nullptr) {

@@ -1,9 +1,5 @@
 #pragma once
-/**
- * @file ListaDoble.h
- * @brief Lista doblemente enlazada generica
- * Practica1EDD - Laboratorio EDD USAC CUNOC 2026
- */
+
 #include "Nodo.h"
 
 template <typename T>
@@ -19,7 +15,6 @@ public:
         while (tamano > 0) eliminarEn(0);
     }
 
-    /** Inserta un dato al final de la lista */
     void insertar(T dato) {
         Nodo<T>* nuevo = new Nodo<T>(dato);
         if (cabeza == nullptr) {
@@ -33,7 +28,6 @@ public:
         tamano++;
     }
 
-    /** Elimina y retorna el dato en una posicion especifica */
     T eliminarEn(int indice) {
         if (indice < 0 || indice >= tamano || cabeza == nullptr) return nullptr;
 

@@ -1,9 +1,5 @@
 #pragma once
-/**
- * @file Paleta.h
- * @brief Codigos ANSI de color para la terminal
- * Practica1EDD - Laboratorio EDD USAC CUNOC 2026
- */
+
 namespace Paleta {
     constexpr const char* RESET    = "\033[0m";
     constexpr const char* NEGRO    = "\033[30m";
@@ -19,6 +15,7 @@ namespace Paleta {
     constexpr const char* NEGRITA  = "\033[1m";
     constexpr const char* TENUE    = "\033[2m";
     constexpr const char* INVERSO  = "\033[7m";
+
     // Fondos
     constexpr const char* FND_ROJO     = "\033[41m";
     constexpr const char* FND_VERDE    = "\033[42m";

@@ -1,10 +1,5 @@
 #pragma once
-/**
- * @file RuedaTurnos.h
- * @brief Lista circular doblemente enlazada para el orden de turnos
- * Implementacion manual desde cero - sin STL
- * Practica1EDD - Laboratorio EDD USAC CUNOC 2026
- */
+
 #include "Contendiente.h"
 
 class RuedaTurnos {

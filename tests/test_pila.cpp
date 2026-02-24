@@ -1,8 +1,3 @@
-/**
- * @file test_pila.cpp
- * @brief Pruebas unitarias: Pila<T>, RuedaTurnos, Baraja
- * Practica1EDD - Laboratorio EDD USAC CUNOC 2026
- */
 #include "../include/TADs/Pila.h"
 #include "../Modelo/RuedaTurnos.h"
 #include "../Modelo/Baraja.h"
@@ -68,7 +63,7 @@ void test_pila_volcar_cargar() {
     VERIFICAR(p.totalElementos()==5, "cargarDesdeArreglo restaura total");
 }
 
-// ── RuedaTurnos ────────────────────────────────────────────────────────────────
+//  Rueda de  Turnos
 void test_rueda_inscribir_avanzar() {
     std::cout << INFO << "--- RuedaTurnos: inscribir / avanzar ---\n";
     Contendiente a("Alfa"), b("Beta"), c("Gamma");
@@ -120,7 +115,7 @@ void test_rueda_retirar() {
     VERIFICAR(rueda.getActual()==&a,     "Circular: C -> A");
 }
 
-// ── Baraja ────────────────────────────────────────────────────────────────────
+// Baraja
 void test_baraja_conteo() {
     std::cout << INFO << "--- Baraja: conteo y escalamiento ---\n";
     ConfigPartida cfg;
@@ -163,11 +158,10 @@ void test_baraja_mezcla_conteo() {
               "mezclar() no altera cantidad de fichas");
 }
 
-// ── Resumen ───────────────────────────────────────────────────────────────────
 int main() {
     std::cout << "\033[1m\033[36m";
     std::cout << "+==========================================+\n";
-    std::cout << "|  Pruebas Unitarias - Practica1EDD 2026  |\n";
+    std::cout << "|  Pruebas Unitaria para la practica       |\n";
     std::cout << "+==========================================+\n\033[0m\n";
 
     test_pila_apilar_sacar();

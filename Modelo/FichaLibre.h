@@ -1,9 +1,5 @@
 #pragma once
-/**
- * @file FichaLibre.h
- * @brief Comodin (ELG) o comodin +4; siempre es jugable.
- * Practica1EDD - Laboratorio EDD USAC CUNOC 2026
- */
+
 #include "Ficha.h"
 
 class FichaLibre : public Ficha {

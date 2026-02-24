@@ -1,8 +1,3 @@
-/**
- * @file FichaLibre.cpp
- * @brief Comodin: siempre es valido; con +4 acumula robo o roba al siguiente.
- * Practica1EDD - Laboratorio EDD USAC CUNOC 2026
- */
 #include "../../Modelo/FichaLibre.h"
 #include "../../Modelo/Pantalla.h"
 #include "../../Modelo/ContextoPartida.h"
@@ -17,7 +12,6 @@ FichaLibre::FichaLibre(bool conRoboCuatro, CaraBaraja cara)
 
 void FichaLibre::renderizar() const { Pantalla::dibujarFicha(this); }
 
-// El comodin siempre puede jugarse sobre cualquier carta
 bool FichaLibre::esValida(const Ficha* /*enMesa*/) const { return true; }
 
 void FichaLibre::ejecutarEfecto(ContextoPartida& ctx) const {
