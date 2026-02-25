@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 4.1)
 
-# Proyecto principal: juego UNO Arena con cartas personalizadas
+
 project(Practica1EDD)
 
 set(CMAKE_CXX_STANDARD 20)

@@ -1,4 +1,4 @@
-# Practica1EDD – UNO Arena 2026
+# Practica1EDD – UNO 2026
 
 **Universidad San Carlos de Guatemala – Centro Universitario de Occidente**  
 **Laboratorio de Estructura de Datos – Ingeniería en Ciencias y Sistemas**  
@@ -40,7 +40,7 @@ Practica1EDD/
 │   ├── FichaNumeral.h
 │   ├── FichaPoderosa.h
 │   ├── FichaLibre.h
-│   ├── FichaVolteo.h     <- Volteo + DevuraTono + BarreraActiva
+│   ├── FichaVolteo.h   
 │   ├── ManoJugador.h     <- Lista enlazada simple
 │   ├── RuedaTurnos.h     <- Lista circular doble
 │   ├── Contendiente.h
@@ -78,10 +78,9 @@ Practica1EDD/
 ### Makefile (recomendado)
 
 ```bash
-make          # compilar
+make          #  escribir en la terminar para compilar
 make run      # compilar y ejecutar
 make test     # pruebas unitarias
-make clean    # limpiar binarios
 ```
 
 ### Script CMake
@@ -117,10 +116,10 @@ g++ -std=c++20 -Wall \
 
 ## Fichas Personalizadas
 
-| Ficha | Símbolo | Efecto |
-|-------|---------|--------|
-| **DevuraTono** | DVR | El siguiente contendiente pierde todas sus fichas del tono activo |
-| **BarreraActiva** | BRR | Activa un escudo; anula el próximo robo acumulado |
+| Ficha              | Símbolo | Efecto                                                            |
+|--------------------|---------|-------------------------------------------------------------------|
+| **Ficha especial** | SWP     | El siguiente contendiente pierde todas sus fichas del tono activo |
+| **Ficha especial** | SPY     | Puedes ver las cartas del otro jugador por 3 segundos             |
 
 ---
 
