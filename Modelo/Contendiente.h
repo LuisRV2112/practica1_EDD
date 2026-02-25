@@ -7,7 +7,6 @@ private:
     std::string  alias_;
     ManoJugador* fichas_;
     bool         unoGritado_;
-    bool         barreraActiva_;
     bool         fuera_;
 
 public:
@@ -26,10 +25,8 @@ public:
     const std::string& getAlias()        const { return alias_; }
     ManoJugador*       getMano()         const { return fichas_; }
     bool               gritado()         const { return unoGritado_; }
-    bool               tieneBarrera()    const { return barreraActiva_; }
     bool               eliminado()       const { return fuera_; }
 
     void marcarUNO(bool v)      { unoGritado_    = v; }
-    void activarBarrera(bool v) { barreraActiva_ = v; }
     void retirar()              { fuera_         = true; }
 };

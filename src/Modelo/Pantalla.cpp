@@ -401,7 +401,7 @@ void Pantalla::mostrarArena(const ContextoPartida& ctx,
                   << lista[i]->getAlias()
                   << "   [" << lista[i]->fichasEnMano() << " fichas]"
                   << (lista[i]->gritado()      ? "  *UNO*"      : "")
-                  << (lista[i]->tieneBarrera() ? "  [BARRERA]" : "")
+
                   << Paleta::RESET << "\n";
     }
     separador('-', 64);
@@ -479,15 +479,13 @@ void Pantalla::demoFichas() {
     FichaLibre         l1(false);
     FichaLibre         l2(true);
     FichaVolteo        v1(TonoCarta::CARMESI);
-    FichaDevuraTono    d1(TonoCarta::DORADO);
-    FichaBarreraActiva ba1(TonoCarta::INDIGO);
     FichaMostrarMano   spy(TonoCarta::CARMESI);
     FichaIntercambiarCarta swp(TonoCarta::ESMERALDA);
 
     ManoJugador m1, m2, m3, m4;
     m1.agregar(&n1); m1.agregar(&n2); m1.agregar(&n3); m1.agregar(&n4);
     m2.agregar(&p1); m2.agregar(&p2); m2.agregar(&p3); m2.agregar(&l1); m2.agregar(&l2);
-    m3.agregar(&v1); m3.agregar(&d1); m3.agregar(&ba1);
+    m3.agregar(&v1);
     m4.agregar(&spy); m4.agregar(&swp);
 
     std::cout << Paleta::NEGRITA << "  -- Fichas Numerales --\n" << Paleta::RESET;
@@ -498,9 +496,9 @@ void Pantalla::demoFichas() {
     std::cout << "  (BLQ)       (GIR)       (+2)        (ELG)       (+4)\n";
     dibujarFichasDesdeMano(&m2, 0, 5);
 
-    std::cout << "\n" << Paleta::NEGRITA << "  -- Especiales clasicas --\n" << Paleta::RESET;
-    std::cout << "  (VLT)       (DVR)       (BRR)\n";
-    dibujarFichasDesdeMano(&m3, 0, 3);
+    std::cout << "\n" << Paleta::NEGRITA << "  -- Ficha Volteo --\n" << Paleta::RESET;
+    std::cout << "  (VLT)\n";
+    dibujarFichasDesdeMano(&m3, 0, 1);
 
     std::cout << "\n" << Paleta::NEGRITA << "  -- Cartas Personalizadas --\n" << Paleta::RESET;
     std::cout << "  (SPY)       (SWP)\n";

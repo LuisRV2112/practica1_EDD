@@ -14,8 +14,6 @@ enum class CategoriaCarta {
     PODEROSA,
     LIBRE,
     VOLTEO,
-    DEVORA_TONO,
-    BARRERA_ACTIVA,
     MOSTRAR_MANO,
     INTERCAMBIAR_CARTA
 };
@@ -33,8 +31,6 @@ enum class EfectoCarta {
     ELEGIR_TONO,
     LANZAR_VOLTEO,
     TONO_ETERNO,
-    DEVORA_COLOR,
-    ESCUDO_ACTIVO,
     VER_MANO,           // Efecto de FichaMostrarMano
     ROBAR_CARTA         // Efecto de FichaIntercambiarCarta
 };

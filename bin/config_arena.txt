@@ -1,0 +1,6 @@
+apilar=0
+retarLibre=0
+roboIlimitado=0
+obligarUNO=1
+permitirObs=0
+modoFlip=0

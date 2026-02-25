@@ -3,7 +3,7 @@
 
 Contendiente::Contendiente(const std::string& alias)
     : alias_(alias), fichas_(new ManoJugador()),
-      unoGritado_(false), barreraActiva_(false), fuera_(false) {}
+      unoGritado_(false), fuera_(false) {}
 
 Contendiente::~Contendiente() { delete fichas_; }
 

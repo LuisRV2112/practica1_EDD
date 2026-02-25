@@ -35,8 +35,6 @@ void Baraja::armarCaraLuminosa() {
             pilaReserva_.apilar(new FichaPoderosa(t, EfectoCarta::GIRO,     CaraBaraja::LUMINOSA));
             pilaReserva_.apilar(new FichaPoderosa(t, EfectoCarta::ROBO_DOS, CaraBaraja::LUMINOSA));
         }
-        pilaReserva_.apilar(new FichaDevuraTono(t,    CaraBaraja::LUMINOSA));
-        pilaReserva_.apilar(new FichaBarreraActiva(t, CaraBaraja::LUMINOSA));
         // Cartas personalizadas
         pilaReserva_.apilar(new FichaMostrarMano(t,       CaraBaraja::LUMINOSA));
         pilaReserva_.apilar(new FichaIntercambiarCarta(t, CaraBaraja::LUMINOSA));

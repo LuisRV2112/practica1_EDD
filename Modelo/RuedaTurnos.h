@@ -41,7 +41,6 @@ public:
         ++cantidad_;
     }
 
-    /** Avanza al siguiente turno segun direccion */
     void avanzar() {
         if (!enTurno_) return;
         enTurno_ = horario_ ? enTurno_->adelante : enTurno_->atras;

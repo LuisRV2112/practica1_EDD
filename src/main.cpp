@@ -192,16 +192,6 @@ static void ejecutarTurno(ContextoPartida& ctx) {
                             ctx.baraja->fichasDisponibles(), enMesa);
 
 
-    if (c->tieneBarrera() && ctx.acumRobo > 0) {
-        std::cout << Paleta::VERDE << Paleta::NEGRITA
-                  << "  [BARRERA] " << c->getAlias()
-                  << " anula el robo acumulado!\n" << Paleta::RESET;
-        c->activarBarrera(false);
-        ctx.acumRobo = 0;
-        ctx.rueda->avanzar();
-        return;
-    }
-
 
     if (ctx.acumRobo > 0 && ctx.config.apilar) {
         if (primerFichaValida(c, enMesa, ctx) < 0) {
