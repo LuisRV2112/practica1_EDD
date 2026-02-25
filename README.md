@@ -4,6 +4,8 @@
 **Laboratorio de Estructura de Datos – Ingeniería en Ciencias y Sistemas**  
 **Docente: Mario Moises Ramirez Tobar | Semestre 1 – 2026**
 
+**Alumno: Luis Regalado | 202131920**
+
 ---
 
 ## Descripción
