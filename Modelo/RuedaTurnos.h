@@ -24,7 +24,7 @@ public:
     RuedaTurnos(const RuedaTurnos&)            = delete;
     RuedaTurnos& operator=(const RuedaTurnos&) = delete;
 
-    /** Inserta contendiente al final del ciclo  O(1) */
+    /** Inserta contendiente y/o jugador al final del ciclo  O(1) */
     void inscribir(Contendiente* c) {
         Ranura* nueva = new Ranura(c);
         if (!enTurno_) {
@@ -52,10 +52,6 @@ public:
     /** Invierte el sentido de la rueda  O(1) */
     void invertirSentido() { horario_ = !horario_; }
 
-    /**
-     * Elimina la ranura del turno actual y avanza  O(1)
-     * Se usa para "Dejar el juego" - el jugador abandona la partida
-     */
     void retirarActual() {
         if (!enTurno_ || cantidad_ == 0) return;
         Ranura* sig = enTurno_->adelante;
